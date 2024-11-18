@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Delivery App</title>
+    <!-- Add any external CSS or frameworks -->
+    <link rel="stylesheet" href="/styles/homepage.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <h1>Food Delivery</h1>
+        </div>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h2>Find Your Favorite Food</h2>
+        <form action="/search" method="GET" class="search-bar">
+          <input
+            type="text"
+            name="query"
+            placeholder="Search restaurants, cuisines, or dishes..."
+            required
+          />
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </section>
+
+      <section class="restaurant-list">
+        <h3>Popular Restaurants</h3>
+        <div class="restaurants">
+          <% restaurants.forEach(restaurant => { %>
+          <div class="restaurant-card">
+            <h4><%= restaurant.name %></h4>
+            <p><strong>Cuisine:</strong> <%= restaurant.cuisine %></p>
+            <p>
+              <strong>Delivery Time:</strong> <%= restaurant.delivery_time %>
+              minutes
+            </p>
+            <p><strong>Address:</strong> <%= restaurant.address %></p>
+            <a href="/restaurants/<%= restaurant.id %>" class="details-btn"
+              >View Details</a
+            >
+          </div>
+          <% }) %>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Food Delivery App. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

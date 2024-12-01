@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scheduled Order Confirmation</title>
+    <link rel="stylesheet" href="/styles/scheduled-confirmation.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <h1>Food Delivery</h1>
+        </div>
+        <ul class="nav-links">
+          <li><a href="/home">Home</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="confirmation">
+        <h2>Order Scheduled!</h2>
+        <p>Your order has been scheduled successfully.</p>
+
+        <div class="order-details">
+          <h3>Order Summary:</h3>
+          <ul>
+            <% scheduledOrder.cart.forEach(item => { %>
+            <li>
+              <%= item.quantity %> x <%= item.name %> - $<%= item.price %>
+            </li>
+            <% }) %>
+          </ul>
+          <p><strong>Total Cost: $<%= scheduledOrder.totalCost %></strong></p>
+          <p>
+            <strong>Scheduled Delivery:</strong> <%= scheduledOrder.deliveryDate
+            %> at <%= scheduledOrder.deliveryTime %>
+          </p>
+        </div>
+
+        <a href="/home" class="button">Back to Home</a>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Food Delivery App. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

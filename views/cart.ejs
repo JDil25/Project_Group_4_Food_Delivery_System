@@ -42,6 +42,17 @@
       <form action="/checkout" method="POST">
         <button type="submit">Proceed to Checkout</button>
       </form>
+      <form action="/schedule-order" method="POST" class="schedule-form">
+        <h3>Schedule Your Order</h3>
+        <label for="delivery-date">Delivery Date:</label>
+        <input type="date" id="delivery-date" name="deliveryDate" required />
+
+        <label for="delivery-time">Delivery Time:</label>
+        <input type="time" id="delivery-time" name="deliveryTime" required />
+
+        <button type="submit" class="schedule-btn">Schedule Order</button>
+      </form>
+
       <% } %>
     </main>
 

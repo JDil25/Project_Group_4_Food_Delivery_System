@@ -69,46 +69,34 @@ const restaurants = [
 
 // Cart storage
 let cart = [];
+// Scheduled Orders
+let scheduledOrders = [];
 
-// Define route for welcome page
+// Routes
+
+// Welcome Page
 app.get("/", (req, res) => {
-  res.render("welcome.ejs");
+  res.render("welcome");
 });
 
-// Define route for login page
+// Login Page
 app.get("/login", (req, res) => {
-  res.render("login.ejs");
+  res.render("login");
 });
 
-// Define route for signup page
+// Signup Page
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-// Route for the main homepage (index.ejs)
+// Homepage
 app.get("/home", (req, res) => {
-  res.render("index.ejs", { restaurants }); // Pass the restaurants array
+  res.render("index", { restaurants });
 });
 
-// Post for Login
-app.post("/login", (req, res) => {
-  // Take in email and password
-  const { email, password } = req.body;
-  // Render homepage
-  res.render("index.ejs", { restaurants });
-});
-
-// Post for Signup
-app.post("/signup", (req, res) => {
-  // Take in email and password
-  const { email, password } = req.body;
-  // Render homepage
-  res.render("index.ejs", { restaurants });
-});
-
-// Route for restaurant details page
+// Restaurant Details
 app.get("/restaurants/:id", (req, res) => {
-  const restaurantId = parseInt(req.params.id);
+  const restaurantId = parseInt(req.params.id, 10);
   const restaurant = restaurants.find((r) => r.id === restaurantId);
   if (restaurant) {
     res.render("restaurant-details", { restaurant });
@@ -117,32 +105,32 @@ app.get("/restaurants/:id", (req, res) => {
   }
 });
 
-// Add item to the cart
+// Add to Cart
 app.post("/cart/add", (req, res) => {
   const { name, price, quantity } = req.body;
 
-  // Check if item already exists in the cart
   const existingItem = cart.find((item) => item.name === name);
   if (existingItem) {
-    existingItem.quantity += parseInt(quantity);
+    existingItem.quantity += parseInt(quantity, 10);
   } else {
-    cart.push({ name, price: parseFloat(price), quantity: parseInt(quantity) });
+    cart.push({
+      name,
+      price: parseFloat(price),
+      quantity: parseInt(quantity, 10),
+    });
   }
 
   res.redirect("/cart");
 });
 
-// Remove item from the cart
+// Remove from Cart
 app.post("/cart/remove", (req, res) => {
   const { name } = req.body;
-
-  // Remove the item by filtering
   cart = cart.filter((item) => item.name !== name);
-
   res.redirect("/cart");
 });
 
-// View cart items
+// View Cart
 app.get("/cart", (req, res) => {
   const totalCost = cart.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -151,31 +139,51 @@ app.get("/cart", (req, res) => {
   res.render("cart", { cart, totalCost });
 });
 
-// Route to handle order submission
+// Checkout
 app.post("/checkout", (req, res) => {
-  // Calculate the total cost of the cart items
   const totalCost = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
 
-  // Render order confirmation page with the cart details
-  res.render("order-confirmation", { cart, totalCost });
+  const cartForConfirmation = [...cart];
+  cart = [];
+
+  res.render("order-confirmation", { cart: cartForConfirmation, totalCost });
 });
 
-// Route to get the order confirmation page
+// Order Confirmation
 app.get("/order-confirmation", (req, res) => {
-  // Calculate the total cost of the cart items
+  res.render("order-confirmation", { cart: [], totalCost: 0 });
+});
+
+// Schedule Order
+app.post("/schedule-order", (req, res) => {
+  const { deliveryDate, deliveryTime } = req.body;
+
   const totalCost = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
+  const scheduledOrder = {
+    cart: [...cart],
+    totalCost,
+    deliveryDate,
+    deliveryTime,
+  };
 
-  // Render the order-confirmation page, passing cart and totalCost
-  res.render("order-confirmation", { cart, totalCost });
+  scheduledOrders.push(scheduledOrder);
+  cart = [];
+
+  res.render("scheduled-confirmation", { scheduledOrder });
 });
 
-// Listen for requests
+// Scheduled Confirmation
+app.get("/scheduled-orders", (req, res) => {
+  res.render("scheduled-orders", { scheduledOrders });
+});
+
+// Start Server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

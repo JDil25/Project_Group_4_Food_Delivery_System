@@ -1,0 +1,156 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Header Styles */
+header {
+  background-color: #ff7f50;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo h1 {
+  margin: 0;
+}
+
+header .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+header .nav-links li {
+  display: inline;
+}
+
+header .nav-links a {
+  color: white;
+  font-weight: bold;
+}
+
+/* Restaurant Details Section */
+.restaurant-info {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.restaurant-info h2 {
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+.restaurant-info p {
+  margin: 10px 0;
+  font-size: 1.1rem;
+}
+
+/* Menu Section */
+.menu {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu h3 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu li:last-child {
+  border-bottom: none;
+}
+
+.menu h4 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.menu p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.menu form {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.menu button {
+  padding: 8px 12px;
+  background-color: #ff7f50;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.menu button:hover {
+  background-color: #e06641;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 20px;
+}

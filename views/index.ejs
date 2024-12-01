@@ -14,15 +14,14 @@
           <h1>Food Delivery</h1>
         </div>
         <ul class="nav-links">
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/cart">Cart</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
-      <section class="hero">
+      <section class="search">
         <h2>Find Your Favorite Food</h2>
         <form action="/search" method="GET" class="search-bar">
           <input
@@ -38,7 +37,7 @@
       <section class="restaurant-list">
         <h3>Popular Restaurants</h3>
         <div class="restaurants">
-          <% restaurants.forEach(restaurant => { %>
+          <% restaurants.forEach((restaurant) => { %>
           <div class="restaurant-card">
             <h4><%= restaurant.name %></h4>
             <p><strong>Cuisine:</strong> <%= restaurant.cuisine %></p>
@@ -47,9 +46,10 @@
               minutes
             </p>
             <p><strong>Address:</strong> <%= restaurant.address %></p>
-            <a href="/restaurants/<%= restaurant.id %>" class="details-btn"
-              >View Details</a
-            >
+            <!-- Updated to use the `id` property dynamically -->
+            <a href="/restaurants/<%= restaurant.id %>" class="details-btn">
+              View Details
+            </a>
           </div>
           <% }) %>
         </div>

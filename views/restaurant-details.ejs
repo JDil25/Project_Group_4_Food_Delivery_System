@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= restaurant.name %> - Details</title>
+    <link rel="stylesheet" href="/styles/restaurant-details.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <h1>Food Delivery</h1>
+        </div>
+        <ul class="nav-links">
+          <li><a href="/home">Home</a></li>
+          <li><a href="/cart">Cart</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="restaurant-info">
+        <h2><%= restaurant.name %></h2>
+        <p><strong>Cuisine:</strong> <%= restaurant.cuisine %></p>
+        <p>
+          <strong>Delivery Time:</strong> <%= restaurant.delivery_time %>
+          minutes
+        </p>
+        <p><strong>Address:</strong> <%= restaurant.address %></p>
+      </section>
+
+      <section class="menu">
+        <h3>Menu</h3>
+        <ul>
+          <% restaurant.menu.forEach(item => { %>
+          <li>
+            <h4><%= item.name %></h4>
+            <p><%= item.description %></p>
+            <p><strong>Price:</strong> $<%= item.price %></p>
+            <form action="/cart/add" method="POST">
+              <input type="hidden" name="name" value="<%= item.name %>" />
+              <input type="hidden" name="price" value="<%= item.price %>" />
+              <label for="quantity-<%= item.name %>">Quantity:</label>
+              <input
+                type="number"
+                id="quantity-<%= item.name %>"
+                name="quantity"
+                value="1"
+                min="1"
+              />
+              <button type="submit">Add to Cart</button>
+            </form>
+          </li>
+          <% }) %>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Food Delivery App. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
